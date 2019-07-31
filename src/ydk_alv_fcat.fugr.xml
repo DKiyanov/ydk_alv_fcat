@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>ALV field catalog preparing</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LYDK_ALV_FCATTOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLYDK_ALV_FCAT</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>YDK_ALV_FCAT_BUILD</FUNCNAME>
+     <SHORT_TEXT>Создание каталога полей</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>ALV_STRUT_KEY</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>YDK_ALV_STRUTURE_KEY</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>STRUCTURES</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IN_FCAT</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>ALV_TAB</PARAMETER>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>FCAT</PARAMETER>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>ALV_STRUT_KEY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Идентификатор структуры ALV</STEXT>
+       <INDEX> 001</INDEX>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STRUCTURES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Список словарных структур/таблиц через &quot;,&quot;</STEXT>
+       <INDEX> 002</INDEX>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IN_FCAT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Исходный Каталог полей</STEXT>
+       <INDEX> 003</INDEX>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ALV_TAB</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>таблица для которой формируется ALV</STEXT>
+       <INDEX> 004</INDEX>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FCAT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Каталог полей ALV</STEXT>
+       <INDEX> 005</INDEX>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+   <I18N_TPOOL>
+    <item>
+     <LANGUAGE>R</LANGUAGE>
+     <TEXTPOOL>
+      <item>
+       <ID>I</ID>
+       <KEY>001</KEY>
+       <ENTRY>Новые поля добалены в каталог,</ENTRY>
+       <LENGTH>45</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>002</KEY>
+       <ENTRY>перейти к настройке?</ENTRY>
+       <LENGTH>45</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>003</KEY>
+       <ENTRY>Настройка ALV</ENTRY>
+       <LENGTH>45</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>004</KEY>
+       <ENTRY>Новые поля добавлены в каталог, уведомите ответственных для выполнения настройки</ENTRY>
+       <LENGTH>100</LENGTH>
+      </item>
+     </TEXTPOOL>
+    </item>
+   </I18N_TPOOL>
+  </asx:values>
+ </asx:abap>
+</abapGit>

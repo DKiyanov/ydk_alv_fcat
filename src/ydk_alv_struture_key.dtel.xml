@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>YDK_ALV_STRUTURE_KEY</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <HEADLEN>27</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>17</SCRLEN2>
+    <SCRLEN3>27</SCRLEN3>
+    <DDTEXT>ALV structure identifier</DDTEXT>
+    <REPTEXT>ALV structure identifier</REPTEXT>
+    <SCRTEXT_S>ALV ID</SCRTEXT_S>
+    <SCRTEXT_M>ALV structure ID</SCRTEXT_M>
+    <SCRTEXT_L>ALV structure identifier</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000040</LENG>
+    <OUTPUTLEN>000040</OUTPUTLEN>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>R</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>R</DDLANGUAGE>
+     <DDTEXT>Идентификатор структуры ALV</DDTEXT>
+     <REPTEXT>Идентификатор структуры ALV</REPTEXT>
+     <SCRTEXT_S>ИД. ALV</SCRTEXT_S>
+     <SCRTEXT_M>Ид. структуры ALV</SCRTEXT_M>
+     <SCRTEXT_L>Идентификатор структуры ALV</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
