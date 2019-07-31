@@ -41,8 +41,8 @@ To edit YDK_ALV_FCAT and YDK_ALV_FCAT_TXT, the program YDK_ALV_FCAT (transaction
 * delete old fields
 * write the catalog to the transport request
 
-![](ydk_alv_fcat_program_screen.png)
 ![](ydk_alv_fcat_selection_screen.png)
+![](ydk_alv_fcat_program_screen.png)
 **List of properties of catalog fields available for customization:**
 * TECH - Checkbox, Technical field
 * CHECKBOX - Checkbox, Output as checkbox
