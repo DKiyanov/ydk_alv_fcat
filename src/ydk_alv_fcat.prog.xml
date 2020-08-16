@@ -1682,6 +1682,42 @@
    </CUA>
    <TPOOL>
     <item>
+     <ID>I</ID>
+     <KEY>001</KEY>
+     <ENTRY>There are changes, to keep?</ENTRY>
+     <LENGTH>50</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>002</KEY>
+     <ENTRY>Exit</ENTRY>
+     <LENGTH>5</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>003</KEY>
+     <ENTRY>Data saved</ENTRY>
+     <LENGTH>16</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>004</KEY>
+     <ENTRY>Selecting the structure of the ALV catalog</ENTRY>
+     <LENGTH>50</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>005</KEY>
+     <ENTRY>Delete selected fields?</ENTRY>
+     <LENGTH>50</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>006</KEY>
+     <ENTRY>Deletion</ENTRY>
+     <LENGTH>8</LENGTH>
+    </item>
+    <item>
      <ID>R</ID>
      <ENTRY>Setting up a field catalog for ALV</ENTRY>
      <LENGTH>34</LENGTH>
@@ -1704,21 +1740,57 @@
      <LANGUAGE>R</LANGUAGE>
      <TEXTPOOL>
       <item>
+       <ID>I</ID>
+       <KEY>001</KEY>
+       <ENTRY>Есть изменения, Сохранить?</ENTRY>
+       <LENGTH>50</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>002</KEY>
+       <ENTRY>Выход</ENTRY>
+       <LENGTH>5</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>003</KEY>
+       <ENTRY>Сохранено</ENTRY>
+       <LENGTH>16</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>004</KEY>
+       <ENTRY>Выбор структуры каталога ALV</ENTRY>
+       <LENGTH>50</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>005</KEY>
+       <ENTRY>Удалить выделенные поля?</ENTRY>
+       <LENGTH>50</LENGTH>
+      </item>
+      <item>
+       <ID>I</ID>
+       <KEY>006</KEY>
+       <ENTRY>Удаление</ENTRY>
+       <LENGTH>8</LENGTH>
+      </item>
+      <item>
        <ID>R</ID>
        <ENTRY>Настройка каталога полей для ALV</ENTRY>
-       <LENGTH>32</LENGTH>
+       <LENGTH>70</LENGTH>
       </item>
       <item>
        <ID>S</ID>
        <KEY>ALVSTRUC</KEY>
        <ENTRY>Структура ALV</ENTRY>
-       <LENGTH>21</LENGTH>
+       <LENGTH>25</LENGTH>
       </item>
       <item>
        <ID>S</ID>
        <KEY>SPRAS</KEY>
        <ENTRY>Язык</ENTRY>
-       <LENGTH>12</LENGTH>
+       <LENGTH>16</LENGTH>
       </item>
      </TEXTPOOL>
     </item>

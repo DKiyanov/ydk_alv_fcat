@@ -2,9 +2,9 @@
 *& Report  YDK_ALV_FCAT
 *& ALV field catalog tuning
 *&---------------------------------------------------------------------*
-*& Autor: Kiyanov Dmitry
+*& Author: Kiyanov Dmitry
 *& Email: DKiyanov@mail.ru
-*& site: http://saptaskbar.ru/
+*& Site: https://github.com/DKiyanov
 *&---------------------------------------------------------------------*
 REPORT  ydk_alv_fcat.
 
@@ -116,6 +116,7 @@ FORM alv_show.
       WHEN 'HOTSPOT'.       <fc>-checkbox  = 'X'.
       WHEN 'LOWERCASE'.     <fc>-checkbox  = 'X'.
       WHEN 'IN_FCAT'.       <fc>-checkbox  = 'X'.
+      WHEN 'AUTO_CONVERT'.  <fc>-checkbox  = 'X'.
       WHEN 'REPTEXT'.       <fc>-lowercase = 'X'.
       WHEN 'SCRTEXT_L'.     <fc>-lowercase = 'X'.
       WHEN 'SCRTEXT_M'.     <fc>-lowercase = 'X'.
@@ -224,9 +225,9 @@ FORM alv_user_command USING ucomm    TYPE sy-ucomm
         CALL FUNCTION 'POPUP_TO_CONFIRM_STEP'
           EXPORTING
 *           DEFAULTOPTION        = 'Y'
-            textline1 = 'Есть изменения, сохранить?'
+            textline1 = 'There are changes, to keep?'(001)
 *           TEXTLINE2 = ' '
-            titel     = 'Выход'
+            titel     = 'Exit'(002)
 *           START_COLUMN         = 25
 *           START_ROW = 6
 *           CANCEL_DISPLAY       = 'X'
@@ -299,7 +300,7 @@ FORM save_data.
 
   CLEAR changed.
 
-  MESSAGE 'Данные сохранены' TYPE 'S'.
+  MESSAGE 'Data saved'(003) TYPE 'S'.
 ENDFORM.
 
 FORM save_order USING ok.
@@ -455,7 +456,7 @@ FORM f4_alvstruc.
 *     DYNPNR          = ' '
 *     DYNPROFIELD     = ' '
 *     STEPL           = 0
-      window_title    = 'Выбор структуры каталога ALV'
+      window_title    = 'Selecting the structure of the ALV catalog'(004)
 *     VALUE           = ' '
       value_org       = 'S'
 *     MULTIPLE_CHOICE = ' '
@@ -497,9 +498,9 @@ FORM delete_row.
   CALL FUNCTION 'POPUP_TO_CONFIRM_STEP'
     EXPORTING
 *     DEFAULTOPTION  = 'Y'
-      textline1      = 'Удалить выделенные поля?'
+      textline1      = 'Delete selected fields?'(005)
 *     TEXTLINE2      = ' '
-      titel          = 'Удаление'
+      titel          = 'Deletion'(006)
 *     START_COLUMN   = 25
 *     START_ROW      = 6
       cancel_display = ' '

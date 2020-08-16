@@ -21,6 +21,18 @@
        <PARAMETER>STRUCTURES</PARAMETER>
        <OPTIONAL>X</OPTIONAL>
       </RSIMP>
+      <RSIMP>
+       <PARAMETER>SAVE_EXCLUDE_FILTER</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <TYP>CLIKE</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>DEL_OLD_FIELD</PARAMETER>
+       <DEFAULT>ABAP_TRUE</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ABAP_BOOL</TYP>
+      </RSIMP>
      </IMPORT>
      <TABLES>
       <RSTBL>
@@ -48,22 +60,34 @@
        <INDEX> 002</INDEX>
       </RSFDO>
       <RSFDO>
+       <PARAMETER>SAVE_EXCLUDE_FILTER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>field mask through &quot;;&quot; for excluding save field in catalog</STEXT>
+       <INDEX> 003</INDEX>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>DEL_OLD_FIELD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>delete old (not now exists) field from savedcatalog</STEXT>
+       <INDEX> 004</INDEX>
+      </RSFDO>
+      <RSFDO>
        <PARAMETER>IN_FCAT</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Исходный Каталог полей</STEXT>
-       <INDEX> 003</INDEX>
+       <INDEX> 005</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>ALV_TAB</PARAMETER>
        <KIND>P</KIND>
        <STEXT>таблица для которой формируется ALV</STEXT>
-       <INDEX> 004</INDEX>
+       <INDEX> 006</INDEX>
       </RSFDO>
       <RSFDO>
        <PARAMETER>FCAT</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Каталог полей ALV</STEXT>
-       <INDEX> 005</INDEX>
+       <INDEX> 007</INDEX>
       </RSFDO>
      </DOCUMENTATION>
     </item>

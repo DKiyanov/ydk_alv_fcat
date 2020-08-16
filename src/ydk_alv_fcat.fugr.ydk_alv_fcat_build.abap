@@ -1,17 +1,19 @@
-FUNCTION YDK_ALV_FCAT_BUILD .
+FUNCTION ydk_alv_fcat_build .
 *"----------------------------------------------------------------------
-*"*"Local Interface:
+*"*"Локальный интерфейс:
 *"  IMPORTING
 *"     REFERENCE(ALV_STRUT_KEY) TYPE  YDK_ALV_STRUTURE_KEY
 *"     VALUE(STRUCTURES) OPTIONAL
+*"     VALUE(SAVE_EXCLUDE_FILTER) TYPE  CLIKE OPTIONAL
+*"     REFERENCE(DEL_OLD_FIELD) TYPE  ABAP_BOOL DEFAULT ABAP_TRUE
 *"  TABLES
 *"      IN_FCAT OPTIONAL
 *"      ALV_TAB
 *"      FCAT
 *"----------------------------------------------------------------------
-*& Autor: Kiyanov Dmitry
+*& Author: Kiyanov Dmitry
 *& Email: DKiyanov@mail.ru
-*& site: http://saptaskbar.ru/
+*& Site: https://github.com/DKiyanov
 *&---------------------------------------------------------------------*
 *& STRUCTURES - a list of dictionary structures / tables through "," from which a description
 *& can be taken for the ALV_TAB fields, the search is performed by the field name,
@@ -24,6 +26,7 @@ FUNCTION YDK_ALV_FCAT_BUILD .
 
   DATA: sfc  TYPE STANDARD TABLE OF ydk_alv_fcat WITH HEADER LINE.
   DATA: sfct TYPE STANDARD TABLE OF ydk_alv_fcat_txt WITH HEADER LINE.
+  FIELD-SYMBOLS <sfc_row> LIKE LINE OF sfc.
 
   DATA: new_field TYPE c.
 
@@ -34,7 +37,7 @@ FUNCTION YDK_ALV_FCAT_BUILD .
   DATA: in_on  TYPE c.
   DATA: in_set TYPE c.
 
-  DATA: ittab TYPE STANDARD TABLE OF string WITH HEADER LINE.
+  DATA: itstr TYPE STANDARD TABLE OF string WITH HEADER LINE.
   DATA: rtab TYPE RANGE OF dd03t-tabname WITH HEADER LINE.
 
   FIELD-SYMBOLS <fcat> TYPE lvc_t_fcat.
@@ -52,11 +55,25 @@ FUNCTION YDK_ALV_FCAT_BUILD .
   IF structures IS SUPPLIED.
     CONDENSE structures NO-GAPS.
     TRANSLATE structures TO UPPER CASE.
-    SPLIT structures AT ',' INTO TABLE ittab.
-    LOOP AT ittab.
-      rtab-low = ittab.
+    SPLIT structures AT ',' INTO TABLE itstr.
+    LOOP AT itstr.
+      rtab-low = itstr.
       APPEND rtab.
     ENDLOOP.
+  ENDIF.
+
+  DATA: rfilter TYPE RANGE OF fieldname. " Range исключаемых из сохранения полей
+  IF save_exclude_filter IS SUPPLIED.
+    CONDENSE save_exclude_filter NO-GAPS.
+    TRANSLATE save_exclude_filter TO UPPER CASE.
+    SPLIT save_exclude_filter AT ';' INTO TABLE itstr.
+
+    LOOP AT itstr.
+      APPEND VALUE #( sign = 'I' option = 'CP' low = itstr ) TO rfilter.
+    ENDLOOP.
+  ENDIF.
+  IF rfilter IS INITIAL.
+    APPEND VALUE #( sign = 'I' option = 'EQ' low = '@!@!@!' ) TO rfilter. " Это чтоб range был не пустым, иначе в него будут попадать все поля
   ENDIF.
 
   IF in_fcat IS SUPPLIED.
@@ -98,12 +115,18 @@ FUNCTION YDK_ALV_FCAT_BUILD .
   it_comp = cl_salv_bs_ddic=>get_components_by_data( alv_tab ).
 
 * удаляем описания вложенных таблиц
-  DATA: sub_path TYPE string.
-  LOOP AT it_comp ASSIGNING <comp> WHERE kind = 'T'.
-    CONCATENATE <comp>-sub_path '-*' INTO sub_path.
-    DELETE it_comp WHERE sub_path CP sub_path.
-    DELETE it_comp WHERE sub_path CP <comp>-sub_path.
+  LOOP AT it_comp ASSIGNING <comp> WHERE kind = 'T' AND id IS NOT INITIAL.
+    PERFORM del_rec USING it_comp CHANGING <comp>-id.
   ENDLOOP.
+
+  LOOP AT it_comp ASSIGNING <comp> WHERE id IS INITIAL OR kind = 'S'.
+    DELETE <fcat> WHERE fieldname = <comp>-name.
+  ENDLOOP.
+
+  DELETE it_comp WHERE id IS INITIAL.
+
+* удаляем не развёрнутые структуры
+  DELETE it_comp WHERE kind = 'S'.
 
   LOOP AT it_comp ASSIGNING <comp>.
     READ TABLE <fcat> ASSIGNING <fc> WITH KEY fieldname = <comp>-sub_path.
@@ -228,16 +251,51 @@ FUNCTION YDK_ALV_FCAT_BUILD .
         ENDIF.
       ENDIF.
 
-      MOVE-CORRESPONDING <fc> TO ydk_alv_fcat.
-      ydk_alv_fcat-alv_strut_key = alv_strut_key.
-      INSERT ydk_alv_fcat FROM ydk_alv_fcat.
+      <fc>-tabname = '1'.
 
-      MOVE-CORRESPONDING <fc> TO ydk_alv_fcat_txt.
-      ydk_alv_fcat_txt-alv_strut_key = alv_strut_key.
-      ydk_alv_fcat_txt-spras         = sy-langu.
-      INSERT ydk_alv_fcat_txt FROM ydk_alv_fcat_txt.
+      IF <fc>-fieldname NOT IN rfilter.
+        MOVE-CORRESPONDING <fc> TO ydk_alv_fcat.
+        ydk_alv_fcat-alv_strut_key = alv_strut_key.
+        INSERT ydk_alv_fcat FROM ydk_alv_fcat.
 
-      new_field = 'X'.
+        MOVE-CORRESPONDING <fc> TO ydk_alv_fcat_txt.
+        ydk_alv_fcat_txt-alv_strut_key = alv_strut_key.
+        ydk_alv_fcat_txt-spras         = sy-langu.
+        INSERT ydk_alv_fcat_txt FROM ydk_alv_fcat_txt.
+
+        new_field = 'X'.
+      ENDIF.
+    ENDIF.
+  ENDLOOP.
+
+  IF del_old_field = abap_true.
+    DATA: rdel_fname TYPE RANGE OF fieldname.
+
+    LOOP AT sfc ASSIGNING <sfc_row>.
+      IF NOT line_exists( <fcat>[ fieldname = <sfc_row>-fieldname ] )
+      OR <sfc_row>-fieldname IN rfilter.
+        APPEND VALUE #( sign = 'I' option = 'EQ' low = <sfc_row>-fieldname ) TO rdel_fname.
+      ENDIF.
+    ENDLOOP.
+
+    IF rdel_fname[] IS NOT INITIAL.
+      DELETE FROM ydk_alv_fcat
+       WHERE alv_strut_key = alv_strut_key
+         AND fieldname IN rdel_fname.
+
+      DELETE FROM ydk_alv_fcat_txt
+       WHERE alv_strut_key = alv_strut_key
+         AND fieldname IN rdel_fname.
+    ENDIF.
+  ENDIF.
+
+  LOOP AT sfc ASSIGNING <sfc_row> WHERE auto_convert = abap_true.
+    IF line_exists( <fcat>[ fieldname = <sfc_row>-fieldname ] ).
+      CALL FUNCTION 'YDK_CONVERSION_EXIT_REGISTER'
+        EXPORTING
+          fieldname = <sfc_row>-fieldname
+        CHANGING
+          fcat      = <fcat>.
     ENDIF.
   ENDLOOP.
 
@@ -281,3 +339,11 @@ FUNCTION YDK_ALV_FCAT_BUILD .
     ENDIF.
   ENDIF.
 ENDFUNCTION.
+
+FORM del_rec USING it_comp TYPE if_salv_bs_t_data=>t_type_component CHANGING id.
+  LOOP AT it_comp ASSIGNING FIELD-SYMBOL(<comp>) WHERE parent_id = id.
+    PERFORM del_rec USING it_comp CHANGING <comp>-id.
+  ENDLOOP.
+
+  CLEAR id.
+ENDFORM.

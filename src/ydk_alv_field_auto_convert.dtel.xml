@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>YDK_ALV_FIELD_AUTO_CONVERT</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DOMNAME>FLAG</DOMNAME>
+    <HEADLEN>55</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>33</SCRLEN3>
+    <DDTEXT>Automatic input/output conversion based on domain values</DDTEXT>
+    <REPTEXT>Automatic input/output conversion based on domain value</REPTEXT>
+    <SCRTEXT_S>AutoConv</SCRTEXT_S>
+    <SCRTEXT_M>Automatic conversion</SCRTEXT_M>
+    <SCRTEXT_L>Automatic input/output conversion</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <REFKIND>D</REFKIND>
+   </DD04V>
+   <I18N_LANGS>
+    <LANGU>R</LANGU>
+   </I18N_LANGS>
+   <DD04_TEXTS>
+    <item>
+     <DDLANGUAGE>R</DDLANGUAGE>
+     <DDTEXT>Автомат. input/output преобр. на основе значений домена</DDTEXT>
+     <REPTEXT>Автомат. input/output преобр. на основе значений домена</REPTEXT>
+     <SCRTEXT_S>АвтоПреобр</SCRTEXT_S>
+     <SCRTEXT_M>Автомат.input/output</SCRTEXT_M>
+     <SCRTEXT_L>Автомат. input/output преобр.</SCRTEXT_L>
+    </item>
+   </DD04_TEXTS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
