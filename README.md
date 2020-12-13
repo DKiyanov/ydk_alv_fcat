@@ -133,3 +133,5 @@ To edit YDK_ALV_FCAT and YDK_ALV_FCAT_TXT, the program YDK_ALV_FCAT (transaction
 * SCRTEXT_L - Long Field Label
 * SCRTEXT_M - Medium Field Label
 * SCRTEXT_S - Short Field Label
+
+**To install this on SAP server, use [abapGit](https://docs.abapgit.org/)**
