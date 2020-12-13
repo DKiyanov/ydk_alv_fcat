@@ -1,5 +1,5 @@
 # YDK_ALV_FCAT
-Quite often concern ABAP programmer - is the building ALV field catalog.
+Quite often concern ABAP programmer - is the building of ALV field catalog.
 SAP recommends that you create a table for ALV in the data dictionary, and then no problem getting the catalog.
 However, I regularly see SAP code and various third-party where a field catalog filled as you like (append-s, all sorts of macros, loop with setting ...), and I often did so too. 
 I'm sick and I decided to solve this problem.
@@ -24,7 +24,13 @@ FM analyzes the structure of the ALV_TAB table, searches for descriptions and se
 If there is a field missing in these tables: 
 * FM trying to find a field description by the data element 
 * saves the template for tuning tables YDK_ALV_FCAT and YDK_ALV_FCAT_TXT
-* if you have the powers of a developer proposes to perform catalog tuning
+* if you have the powers of a developer proposes to perform catalog tuning.
+
+It usually works like this:  
+After creating or changing the structure of the ALV table, I run the program in the development system.  
+FM YDK_ALV_FCAT_BUILD generates a a field catalog, if new fields are present, templates for them will appear in the customizer.  
+Than I launch the customizer (the YDK_ALV_FCAT program), correct if necessary the descriptions and settings of the fields, save the changes in the same request, which caused changes in the ALV structure.  
+Than I restart the program - see what happened ..... bring it to the production.
 
 **main parameters:**
 * alv_strut_key - Required, Structure name for the program YDK_ALV_FCAT, this is not a dictionary structure, this is just a global name for identifying a set of fields. I usually do it the same as the program name (if there are several ALVs in the program I add postfixes)
